@@ -5,6 +5,7 @@ import sys
 
 totalscore = 0
 backpack = []
+Vengeance_Sword = False
 
 def tprint(s):
     print(s)
@@ -20,6 +21,10 @@ def fight():
     whichmonster = random.choice(monsters)
     if whichmonster=="Omega dragon":
         totalscore += omega_dragon()
+    if whichmonster=="weakminion":
+        totalscore += weakminion()
+    if whichmonster=="rock":
+        totalscore += rock()
         
 def omega_dragon():
     tprint("Peto: OH NO IT IS THE OMEGA DRAGON WHAT SHOULD WE DO?!")
@@ -50,16 +55,23 @@ def weakminion():
     choice = input("1 - say hi\n2- run away\n3 - kill it\n4 - look at it soo much untill you die of its cuteness!")
     if choice == '1':
         minionstate = random.randint(1,4)
-        if minionstate == 3:
+        if minionstate == 3 and not Vengeance_Sword:
             tprint(name + ": hi there little guy...")
             tprint("Peto: he may be a little shy")
             tprint("* smiles cutely and gives you the sword of vengeance")
             backpack.append(["Sword Of Vengeance", "Special powers: can kill an asteroid"])
+            Vengeance_Sword = True
+            return 100
         else:
             tprint("* this little thing grows ten times its size and is ready to eat lunch *")
-            tprint(name "& Peto: AHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!")
-            tprint("")
+            tprint(name + "& Peto: AHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!")
+            tprint("* you both run very quickly out of there *")
+            return 0
 
+def rock():
+    tprint("* you found a rock *")
+    backpack.append(["rock", "Special powers: can be thrown maybe"])
+    return 0
 l = 0
 while l == 0:
 
@@ -113,4 +125,3 @@ while l == 0:
         else:
             print ("Peto: I do not think that is a choice")
     tprint(name + ": Ok lets go fight monsters to level up and get stronger and destroy the asteroid")
-    
