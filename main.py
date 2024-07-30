@@ -2,24 +2,25 @@ import time
 import random
 import sys
 
+# initialize variables
 totalscore = 0
 backpack = []
 Vengeance_Sword = False
 
 
-def tprint(s):
+def tprint(s): # print and wait function
     print(s)
     time.sleep(2)
 
 
-def game_over():
+def game_over(): # Ends the game
     global totalscore
     totalscore = -5000
     print(". . . GAME OVER . . .")
     time.sleep(3)
 
 
-def fight():
+def fight(): # fights a random monster
     global totalscore
     tprint("Your total score is " + str(totalscore))
     monsters = ['Omega dragon', 'weakminion']
@@ -30,14 +31,14 @@ def fight():
         totalscore += weakminion()
 
 
-def omega_dragon():
+def omega_dragon(): # monster
     tprint("Peto: OH NO IT IS THE OMEGA DRAGON WHAT SHOULD WE DO?!")
     print("* What will you do? *")
     print("1 - Run away")
     print("2 - Attack the monster")
     print("3 - Defend against the monster")
     choice = input()
-    while True:
+    while True: # loop in case input was invalid
         if choice == "1":
             tprint("Peto: QUICK IMA THROW SOME ROCKS TO DISTRACT HIM!!")
             tprint("* you both run away from the dragon and lose 10 points *")
@@ -57,42 +58,39 @@ def omega_dragon():
             tprint("* you both defend against the monster *")
             tprint("Peto: I am pretty sure we are dead the monster is too strong")
             return -1000
-        else:
+        else: # handling invalid choices
             print("Peto: I do not think that is a choice")
-            continue
 
-
-def weakminion():
+def weakminion(): # monster
     global Vengeance_Sword
     tprint("* a small little cute creature comes out from under a rock *")
-    choice = input("1 - say hi\n2 - run away\n3 - kill it\n4 - look at it so much until you die of its cuteness!\n")
-    if choice == '1':
-        minionstate = random.randint(1, 4)
-        if minionstate == 3 and not Vengeance_Sword:
-            tprint(name + ": hi there little guy...")
-            tprint("Peto: he may be a little shy")
-            tprint("* smiles cutely and gives you the Sword of Vengeance *")
-            backpack.append("Sword Of Vengeance")
-            Vengeance_Sword = True
-            return 100
-        else:
-            tprint("* this little thing grows ten times its size and is ready to eat lunch *")
-            tprint(name + "& Peto: AHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!")
-            tprint("* you both run very quickly out of there and you lose 10 points *")
-            return -10
-    elif choice == '2':
-        tprint("* you both run away safely and lose 50 points *")
-        return -50
-    elif choice == '3':
-        tprint("* you easily defeat the weak minion *")
-        return 50
-    elif choice == '4':
-        tprint("* you die of its cuteness *")
-        return -1000
-    else:
-        print("Peto: I do not think that is a choice")
-        return 0
-
+    while true:
+        choice = input("1 - say hi\n2 - run away\n3 - kill it\n4 - look at it so much until you die of its cuteness!\n")
+        if choice == '1':
+            minionstate = random.randint(1, 4)
+            if minionstate == 3 and not Vengeance_Sword:
+                tprint(name + ": hi there little guy...")
+                tprint("Peto: he may be a little shy")
+                tprint("* smiles cutely and gives you the Sword of Vengeance *")
+                backpack.append("Sword Of Vengeance")
+                Vengeance_Sword = True
+                return 100
+            else:
+                tprint("* this little thing grows ten times its size and is ready to eat lunch *")
+                tprint(name + "& Peto: AHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!")
+                tprint("* you both run very quickly out of there and you lose 10 points *")
+                return -10
+        elif choice == '2':
+            tprint("* you both run away safely and lose 50 points *")
+            return -50
+        elif choice == '3':
+            tprint("* you easily defeat the weak minion *")
+            return 50
+        elif choice == '4':
+            tprint("* you die of its cuteness *")
+            return -1000
+        else: # handling invalid choices
+            print("Peto: I do not think that is a choice")
 
 def rock():
     tprint("* you found a rock *")
@@ -100,7 +98,7 @@ def rock():
     return 0
 
 
-while True:
+while True: # game loop
     name = input("Please enter your name: ")
     tprint("Oh, that's a beautiful name..")
 
@@ -118,7 +116,7 @@ while True:
     tprint("Peto: Don't you wanna try?")
     tprint("We are gonna die anyways if no one stopped it")
 
-    while True:
+    while True: # choice loop
         print("*What will you do?*")
         print("1 - Stay at home and eat nachos")
         print("2 - GO AND DESTROY THE ASTEROID!!")
@@ -128,12 +126,12 @@ while True:
             print("I'll give you another chance")
         elif choice == "2":
             break
-        else:
+        else: # handling invalid choices
             print("We don't have pizza here, sorry?")
 
     tprint(name + ": Well, you have a point. . .")
     tprint(name + ": Ok let's go gather some items to be able to fight")
-    while True:
+    while True: # choice loop
         tprint(name + ": So where should we go first?")
         print("1 - Look inside of your home and try to find something useful")
         print("2 - Go into the dangerous forest where there might be something valuable")
@@ -148,7 +146,7 @@ while True:
             tprint(name + ": Well that is disappointing")
             backpack.append("rock")
             break
-        else:
+        else: # handling invalid choices
             print("Peto: I do not think that is a choice")
 
     tprint(name + ": Ok let's go fight monsters to level up and get stronger and destroy the asteroid")
